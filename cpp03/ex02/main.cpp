@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 11:24:38 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/09/22 10:51:50 by hucorrei         ###   ########.fr       */
+/*   Created: 2023/08/31 14:04:45 by hucorrei          #+#    #+#             */
+/*   Updated: 2023/09/25 13:11:01 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
-class ScavTrap : public ClapTrap {
-	
-	public:
-		ScavTrap();
-		ScavTrap(std::string name);
-		ScavTrap(const ScavTrap &ScavTrap);
-		~ScavTrap();
-		ScavTrap &operator = (const ScavTrap &ScavTrap);
-		ScavTrap(std::string name, int hitpoints, int energyPoints, int attackDamage);
-		void guardGate();
-		void attack(const std::string& target);
-};
+int main(void){
+	ScavTrap	a("Luffy");
+	ScavTrap	b("Crocodile");
+	FragTrap	c("Zoro");
+	a.guardGate();
+	a.attack("Crocodile");
+	b.takeDamage(20);
+	c.attack("Crocodile");
+	b.takeDamage(30);
+	c.highFivesGuys();
+}

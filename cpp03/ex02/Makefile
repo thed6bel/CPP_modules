@@ -6,7 +6,7 @@
 #    By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/31 13:35:34 by hucorrei          #+#    #+#              #
-#    Updated: 2023/09/22 10:32:24 by hucorrei         ###   ########.fr        #
+#    Updated: 2023/09/22 11:30:10 by hucorrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #                                     CONFIG                                   #
 ################################################################################
 
-NAME		= ScavTrap
+NAME		= FragTrap
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 OBJ_DIR		= .objs
@@ -27,6 +27,7 @@ RM			= rm -rf
 SRCS		= 	main.cpp \
 				ClapTrap.cpp \
 				ScavTrap.cpp \
+				FragTrap.cpp
 
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 
