@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:18:00 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/02 14:13:34 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:35:33 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,18 @@ Form::~Form() {
 }
 
 Form::Form(const std::string name, int gradeToSign, int gradeToExecute, bool _signed) : _name(name), _signed(_signed), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
+	if (gradeToSign < 1 || gradeToExecute < 1)
+        throw GradeTooHighException();
+    if (gradeToSign > 150 || gradeToExecute > 150)
+        throw GradeTooLowException();
 	try {
 		checkExceptions(gradeToExecute);
 		checkExceptions(gradeToSign);
 	}
 	catch (const std::exception& e) {
+		std::cout << "test exec form" << std::endl;
 		throw;
 	}
-	
-	// if (gradeToSign < 1 || gradeToExecute < 1) {
-	// 	throw Form::GradeTooHighException();
-	// }
-	// else if (gradeToSign > 150 || gradeToExecute > 150) {
-	// 	throw Form::GradeTooLowException();
-	// }
-
-
-	// checkGradeToSign(gradeToSign);
-	// checkGradeToExecute(gradeToExecute);
 }
 
 Form &Form::operator = (const Form &form) {
@@ -154,23 +148,31 @@ std::ostream &operator << (std::ostream &out, const Form &form) {
 }
 
 void Form::checkExceptions(int exec) {
-	if (exec < 1) {
-		throw Form::GradeTooHighException();
-	}
-	else if (exec > 150) {
-		throw Form::GradeTooLowException();
+	try {
+		if (exec < 1) {
+			throw Form::GradeTooHighException();
+		}
+		else if (exec > 150) {
+			throw Form::GradeTooLowException();
+		}
+	} catch (const Form::GradeTooLowException &e) {
+	std::cerr << "Caught an exception: " << e.what() << std::endl;
 	}
 }
 
 void Form::checkSignExceptions(int sign) {
-	if (sign < 1) {
-		throw Form::GradeTooHighException();
-	}
-	else if (sign > 150) {
-		throw Form::GradeTooLowException();
-	}
-	else if (this->_signed == true) {
-		throw Form::FormSignedException();
+	try {
+		if (sign < 1) {
+			throw Form::GradeTooHighException();
+		}
+		else if (sign > 150) {
+			throw Form::GradeTooLowException();
+		}
+		else if (this->_signed == true) {
+			throw Form::FormSignedException();
+		}
+	} catch (const Form::GradeTooLowException &e) {
+	std::cerr << "Caught an exception: " << e.what() << std::endl;
 	}
 }
 

@@ -6,40 +6,36 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:04:45 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/02 14:47:13 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/10/04 10:40:18 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
 int main(){
 	try
 	{
-			Bureaucrat bureaucrat1 = Bureaucrat("bureaucrat1", 6);
-			Form form1 = Form("form1", 5, 1, false);
-
+			Bureaucrat bureaucrat1 = Bureaucrat("Garp", 142);
 			std::cout << bureaucrat1 << std::endl;
-			std::cout << form1 << std::endl;
+			Intern someRandomIntern;
+			AForm* rrf;
+			rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+			// rrf = someRandomIntern.makeForm("presidential pardon", "Bender");
+			// rrf = someRandomIntern.makeForm("shrubbery creation", "Bender");
 
-			
-			bureaucrat1.signForm(form1);
-			std::cout << form1 << std::endl;
-			bureaucrat1.signForm(form1);
-			bureaucrat1.executeForm(form1);
-			bureaucrat1.incrementGrade();
-			bureaucrat1.signForm(form1);
-			bureaucrat1.executeForm(form1);
-			bureaucrat1.incrementGrade();
-			bureaucrat1.incrementGrade();
-			bureaucrat1.incrementGrade();
-			std::cout << bureaucrat1 << std::endl;
-			bureaucrat1.signForm(form1);
-			bureaucrat1.executeForm(form1);
-			bureaucrat1.incrementGrade();
-			bureaucrat1.executeForm(form1);
-			bureaucrat1.incrementGrade();
-
+			std::cout << *rrf << std::endl;
+			bureaucrat1.signForm(*rrf);
+			bureaucrat1.executeForm(*rrf);
+	
+			Bureaucrat bureaucrat2 = Bureaucrat("Sengoku", 1);
+			std::cout << bureaucrat2 << std::endl;
+			bureaucrat2.signForm(*rrf);
+			bureaucrat2.executeForm(*rrf);
 	}
 	catch(std::exception &e) {
 		std::cerr << e.what() << std::endl;
