@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:31:35 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/06 12:59:11 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/10/13 14:44:55 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,21 @@ Base * Base::generate(void) {
 	else
 		return new C;
 }
-//verifier si return is NULL
+
 void Base::identify(Base* p) {
-	if (dynamic_cast<A*>(p))
+	A* a = dynamic_cast<A*>(p);
+	B* b = dynamic_cast<B*>(p);
+	C* c = dynamic_cast<C*>(p);
+	if (a != NULL)
 		std::cout << "*A Type" << std::endl;
-	else if (dynamic_cast<B*>(p))
+	else if (b != NULL)
 		std::cout << "*B Type" << std::endl;
-	else if (dynamic_cast<C*>(p))
+	else if (c != NULL)
 		std::cout << "*C Type" << std::endl;
 	else
 		std::cout << "NULL" << std::endl;
 }
-//utiliser try and catch 
+
 void Base::identify(Base& p) {
 	try {
 		if (dynamic_cast<A*>(&p))

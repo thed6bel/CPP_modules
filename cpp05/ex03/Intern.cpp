@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:13:20 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/04 10:37:46 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/10/13 14:07:36 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,25 @@ AForm *Intern::makeForm(std::string formName, std::string target) {
         if (formName == forms[i])
             break ;
     }
+    std::cout << "Intern creates " << formName << " Form" << std::endl;
+    AForm *tmp;
     switch (i)
     {
     case 0:
-        return new RobotomyRequestForm(target);    
+        tmp = new RobotomyRequestForm(target);
+        return tmp;
     case 1:
-        return new PresidentialPardonForm(target);
+        tmp = new PresidentialPardonForm(target);
+        return tmp;
     case 2:
-        return new ShrubberyCreationForm(target);
+        tmp = new ShrubberyCreationForm(target);
+        return tmp;
     default:
         throw Intern::InternFailException();
+        return tmp;
     }
 }
 
 const char *Intern::InternFailException::what() const throw() {
-	return "Intern fail";
+	return "Intern fail to create Form";
 }

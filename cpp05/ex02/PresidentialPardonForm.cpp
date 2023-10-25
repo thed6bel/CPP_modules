@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 09:29:45 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/03 11:33:27 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:24:23 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ const char *PresidentialPardonForm::PresidentialPardonFormExecException::what() 
 }
 
 std::ostream &operator << (std::ostream &out, const PresidentialPardonForm &obj){
-	out << obj.getName() << " form, grade to sign " << obj.getGradeToSign() << ", grade to execute " << obj.getGradeToExecute() << ", target " << obj.getTarget() << "." << std::endl;
+	out << obj.getName() << " form: grade to sign " << obj.getGradeToSign() << ", grade to execute " << obj.getGradeToExecute() << ", target " << obj.getTarget() << "." << std::endl;
 	return (out);
 }

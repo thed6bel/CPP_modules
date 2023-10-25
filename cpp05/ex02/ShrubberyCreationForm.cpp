@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 09:29:29 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/03 13:56:01 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:26:48 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ const char *ShrubberyCreationForm::ShrubberyCreationFormExecException::what() co
 }
 
 std::ostream &operator << (std::ostream &out, const ShrubberyCreationForm &obj) {
-	out << obj.getName() << " form with grade to sign " << obj.getGradeToSign() << " and grade to execute " << obj.getGradeToExecute() << " and target " << obj.getTarget() << " ,is signed " << std::boolalpha << obj.getSigned() << std::endl;
+	out << obj.getName() << " form: grade to sign " << obj.getGradeToSign() << ", grade to execute " << obj.getGradeToExecute() << ", target " << obj.getTarget() << "." << std::endl;
 	return (out);
 }

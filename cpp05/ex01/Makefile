@@ -6,7 +6,7 @@
 #    By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/31 13:35:34 by hucorrei          #+#    #+#              #
-#    Updated: 2023/10/03 11:39:17 by hucorrei         ###   ########.fr        #
+#    Updated: 2023/10/13 09:30:43 by hucorrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ fclean: clean
 re: fclean all
 
 run: all
-    ./$(NAME)
+	./$(NAME)
 
 git:
 		git add .

@@ -6,7 +6,7 @@
 #    By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/31 13:35:34 by hucorrei          #+#    #+#              #
-#    Updated: 2023/10/13 14:12:55 by hucorrei         ###   ########.fr        #
+#    Updated: 2023/10/19 13:07:59 by hucorrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #                                     CONFIG                                   #
 ################################################################################
 
-NAME		= convert
+NAME		= MutantStack
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 OBJ_DIR		= .objs
@@ -60,10 +60,13 @@ fclean: clean
 
 re: fclean all
 
+run: all
+	./$(NAME)
+
 git:
 		git add .
 		git commit -m "$m"
 		git push
 		@ echo "$(BLUE)ALL is on your $(CYAN)GIT $(CLR_RMV)✔️"
 
-.PHONY:	all clean fclean re git
+.PHONY:	all clean fclean re run git

@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:04:45 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/09/27 14:14:15 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/10/13 09:31:49 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(){
 		delete bureaucrat2;
 	}
 	std::cout << "----------------------------------" << std::endl;
-	Bureaucrat *bureaucrat3 = new Bureaucrat("N587963489198417", 150);
+	Bureaucrat *bureaucrat3 = new Bureaucrat("R2D2.C4.1984.S19", 150);
 	try
 	{
 		std::cout << *bureaucrat3;
@@ -56,7 +56,24 @@ int main(){
 		std::cout << e.what() << std::endl;
 		delete bureaucrat3;
 	}
-	
-	
+	std::cout << "----------------------------------" << std::endl;
+	try
+	{
+		Bureaucrat test = Bureaucrat("testerror", 151);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}	
+	std::cout << "----------------------------------" << std::endl;
+	try
+	{
+		Bureaucrat test2 = Bureaucrat("testerror", 0);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}	
+
 	return 0;
 }

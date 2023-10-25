@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:17:52 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/03 14:46:37 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:56:51 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ class  AForm
 		bool getSigned() const;
 		int getGradeToSign() const;
 		int getGradeToExecute() const;
-		void beSigned(Bureaucrat &bureaucrat);//virtual ????
+		void beSigned(Bureaucrat &bureaucrat);
 		virtual void execute(Bureaucrat const &executor) const = 0;
 		void checkGradeToSign(int gradeToSign);
 		void checkGradeToExecute(int gradeToExecute) const;

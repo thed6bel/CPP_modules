@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:18:00 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/02 14:35:33 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:12:07 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,19 @@ Form::~Form() {
 }
 
 Form::Form(const std::string name, int gradeToSign, int gradeToExecute, bool _signed) : _name(name), _signed(_signed), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
-	if (gradeToSign < 1 || gradeToExecute < 1)
+	if (gradeToSign < 1 || gradeToExecute < 1) {
+		std::cout << "Error : Grade ";
         throw GradeTooHighException();
-    if (gradeToSign > 150 || gradeToExecute > 150)
+	}
+    if (gradeToSign > 150 || gradeToExecute > 150) {
+		std::cout << "Error : Grade ";
         throw GradeTooLowException();
+	}
 	try {
 		checkExceptions(gradeToExecute);
 		checkExceptions(gradeToSign);
 	}
 	catch (const std::exception& e) {
-		std::cout << "test exec form" << std::endl;
 		throw;
 	}
 }

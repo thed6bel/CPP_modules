@@ -6,13 +6,27 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:04:45 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/11 13:57:22 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:37:58 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
 #include <sstream>
 
+class Awesome
+{
+  public:
+    Awesome( void ) : _n( 42 ) { return; }
+    int get( void ) const { return this->_n; }
+  private:
+    int _n;
+};
+
+std::ostream & operator<<( std::ostream & o, Awesome const & rhs )
+{
+  o << rhs.get();
+  return o;
+}
 
 int	main(void){
     
@@ -24,6 +38,7 @@ int	main(void){
     Array<float> h(2);
     Array<double> j(3);
     int *g = new int();
+    Awesome tab2[5];
     
 
 
@@ -37,9 +52,9 @@ int	main(void){
         c[i] = ss.str();
     }
     for (unsigned int i = 0; i < h.size(); i++)
-        h[i] = i + 2023;
+        h[i] = i + 42.19f;
     for (unsigned int i = 0; i < j.size(); i++)
-        j[i] = i + 3000;
+        j[i] = i + 3000.42;
     
     d = a;
     Array<int> e(b);
@@ -85,8 +100,10 @@ int	main(void){
     for (unsigned int i = 0; i < j.size(); i++)
         std::cout << j[i] << " ";
     std::cout << std::endl;
+    for (unsigned int i = 0; i < 5; i++)
+        std::cout << "tab2[" << i << "]: " << tab2[i] << " ";
+    std::cout << std::endl;
 
     delete g;
-    // system("leaks Array");
     return 0;
 }

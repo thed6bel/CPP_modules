@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 09:29:38 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/03 15:47:16 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:27:53 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ const char* RobotomyRequestForm::RobotomyRequestFormExecException::what() const 
 }
 
 std::ostream &operator << (std::ostream &out, const RobotomyRequestForm &obj){
-	out << obj.getName() << " form, grade to sign " << obj.getGradeToSign() << ", grade to execute " << obj.getGradeToExecute() << ", target " << obj.getTarget() << std::endl;
+	out << obj.getName() << " form: grade to sign " << obj.getGradeToSign() << ", grade to execute " << obj.getGradeToExecute() << ", target " << obj.getTarget() << "." << std::endl;
 	return (out);
 }
 

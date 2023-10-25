@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:12:28 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/09 14:33:12 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/10/13 14:14:06 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ ScalarConverter &ScalarConverter::operator = (const ScalarConverter &scalarconve
 
 void ScalarConverter::convert(const std::string& str){
 	int type = getType(str);
-	std::cout << "type: " << type << std::endl;
 	std::cout.precision(1);
 	char * endPtr;
 	long intValue = std::strtol(str.c_str(), &endPtr, 10);
-	std::cout << "int value: " << intValue << std::endl;
 	if (type == 0){
 		std::cout << "Char: impossible" << std::endl;
 		std::cout << "Int: impossible" << std::endl;
