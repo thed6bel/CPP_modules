@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thed6bel <thed6bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:31:31 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/26 16:59:07 by thed6bel         ###   ########.fr       */
+/*   Updated: 2023/10/27 11:05:00 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ public:
     void    result(BitcoinExchange& fd);
     double  getRate(std::string date);
     std::string decreaseDate(std::string date);
-    int controlDoubleDate(std::map<std::string, double> data, std::string date);
-    int controlEmptyValue(std::string value);
+    bool controlDoubleDate(std::map<std::string, double> data, std::string date);
+    bool controlEmptyValue(std::string value);
 
     BitcoinExchange& operator=(const BitcoinExchange& rhs);
 };

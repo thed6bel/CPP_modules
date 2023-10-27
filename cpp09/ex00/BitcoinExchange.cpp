@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thed6bel <thed6bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:31:28 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/26 16:59:22 by thed6bel         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:28:53 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ void BitcoinExchange::readData() {
             }
             i++;
             continue;
-        }
-        if (line[10] != ',') {
+        } if (line[10] != ',') {
             std::cout << "Error: Bad date or value format on *.csv" << std::endl;
             exit(1);
         }
@@ -68,19 +67,23 @@ void BitcoinExchange::readData() {
         if (line.find_first_of(",") != std::string::npos) {
             date = line.substr(0, line.find_first_of(",")).c_str();
             value = atof(line.substr(line.find_first_of(",") + 1).c_str());
-        }
-        if (controlEmptyValue(date) || checkLineFormat(line)) {
-            std::cout << "Error: Empty date, bad date format or bad date input on *.csv => " << date << std::endl;
+        } if (controlEmptyValue(date)) {
+			std::cout << "Error: Empty date" << std::endl;
+			exit(1);
+		} if (checkLineFormat(line))
             exit(1);
-        }
         if (controlEmptyValue(line)) {
             std::cout << "Error: Empty value or bad value" << std::endl;
             exit(1);
-        }
-         if (controlDoubleDate(this->_values, date)) {
+        } 
+		if (controlDoubleDate(this->_values, date)) {
             std::cout << "Error: Double date on *.csv input file" << std::endl;
             exit(1);
-        }
+        } 
+		if (!line[11]) {
+			std::cout << "Error: Empty value on *.csv input file" << std::endl;
+			exit(1);
+		}
         std::pair<std::string, double> data(date, value);
         _values.insert(data);
     } if (this->_values.size() == 0) {
@@ -94,17 +97,17 @@ bool BitcoinExchange::checkLineFormat(std::string &line) {
     double rate;
 
     if (line.size() < 12 || line[4] != '-' || line[7] != '-' || !strdigit(line.substr(line.find_first_of("|,") + 1))) {
-        std::cout << "Error: bad input => " << line << std::endl;
+        std::cout << "Error: bad input => " << line.substr(0, line.find_first_of("|")).c_str() << std::endl;
         return true;
     }
     year = std::atoi(line.substr(0, line.find("-")).c_str());
-    if (year < 2009 || year > 9999) {
-        std::cout << "Error: bad year input => " << line << std::endl;
+    if (year < 1 || year > 9999) {
+        std::cout << "Error: bad input => " << line.substr(0, line.find_first_of("|")).c_str() << std::endl;
         return true;
     }
     month = std::atoi(line.substr(5).c_str());
     if (month < 1 || month > 12) {
-        std::cout << "Error: bad month input => " << line << std::endl;
+        std::cout << "Error: bad input => " << line.substr(0, line.find_first_of("|")).c_str() << std::endl;
         return true;
     }
     day = std::atoi(line.substr(8).c_str());
@@ -123,7 +126,10 @@ bool BitcoinExchange::checkLineFormat(std::string &line) {
         else
             daysInMonth = 31;
         if (day > daysInMonth) {
-            std::cout << "Error: bad day input => " << year << "-" << month << "-" << day << std::endl;
+            std::cout << "Error: bad input => " 
+				<< std::setw(4) << std::setfill('0') << year << "-" 
+				<< std::setw(2) << std::setfill('0') << month << "-" 
+				<< std::setw(2) << std::setfill('0') << day << std::endl;
             return 1;
         }
     rate = std::atof(line.substr(line.find_first_of("|,") + 1).c_str());
@@ -134,8 +140,11 @@ bool BitcoinExchange::checkLineFormat(std::string &line) {
             std::cout << "Error: too large a number." << std::endl;
         return true;
     }
-    if (year == 2009 && month == 1 && day == 1) {
-        std::cout << "Error: date before the creation of btc" << std::endl;
+    if ((year == 2009 && month == 1 && day == 1) || year < 2009) {
+        std::cout << "Error: date before the creation of btc on data base => " 
+			<< std::setw(4) << std::setfill('0') << year << "-" 
+			<< std::setw(2) << std::setfill('0') << month << "-" 
+			<< std::setw(2) << std::setfill('0') << day << std::endl;
         return true;
     }
     return false;
@@ -146,7 +155,7 @@ bool BitcoinExchange::strdigit(std::string str)
     int decimal_point;
 
     decimal_point = 0;
-    while (str[0] == ' ')
+    if (str[0] == ' ')
         str = str.substr(1);
     for (int i = 0; str[i]; i++) {
         if (std::isdigit(str[i]))
@@ -159,7 +168,7 @@ bool BitcoinExchange::strdigit(std::string str)
 }
 
 void BitcoinExchange::result(BitcoinExchange &fd) {
-	std::string	line, date;
+	std::string	line, date, date_tmp;
 	double		value, rate;
 	size_t		i;
 
@@ -175,14 +184,18 @@ void BitcoinExchange::result(BitcoinExchange &fd) {
 		}
 		if (checkLineFormat(line))
 			continue ;
-		date = line.substr(0, line.find_first_of("|,") - 1).c_str();
-		value = atof(line.substr(line.find_first_of("|,") + 1).c_str());
+        if (line[11] != '|') {
+            std::cout << "Error: Bad input => " << line << std::endl;
+            continue ;
+        }
+		date = line.substr(0, line.find_first_of("|") - 1).c_str();
+		value = atof(line.substr(line.find_first_of("|") + 1).c_str());
 
-		std::map<std::string, double>::iterator it;
-		rate = getRate(date);
+        date_tmp = date;
+		rate = getRate(date_tmp);
 		while (rate < 0) {
-			date = decreaseDate(date);
-			rate = getRate(date);
+			date_tmp = decreaseDate(date_tmp);
+			rate = getRate(date_tmp);
 		}
 		std::cout << date << " => " << value << " = " << value * rate << std::endl;
 	}
@@ -203,6 +216,10 @@ std::string BitcoinExchange::decreaseDate(std::string date) {
     int year, month, day;
     char separator;
 
+	std::map<std::string, double>::reverse_iterator rit = _values.rbegin();
+	std::string date_tmp = rit->first;
+	if (date_tmp < date)
+		return date_tmp;
     if (!(iss >> year >> separator >> month >> separator >> day)) {
         std::cout << "Invalid date format" << std::endl;;
     }
@@ -238,16 +255,16 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &rhs)
     return *this;
 }
 
-int BitcoinExchange::controlDoubleDate(std::map<std::string, double> data, std::string date) {
+bool BitcoinExchange::controlDoubleDate(std::map<std::string, double> data, std::string date) {
     for (std::map<std::string, double>::iterator it = data.begin(); it != data.end(); ++it) {
         if (it->first == date)
-            return 1;
+            return true;
     }
-    return 0;
+    return false;
 }
 
-int BitcoinExchange::controlEmptyValue(std::string value) {
+bool BitcoinExchange::controlEmptyValue(std::string value) {
     if (value == "" || value.find_first_not_of(" \t\n\v\f\r"))
-        return 1;
-    return 0;
+        return true;
+    return false;
 }
