@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+         #
+#    By: thed6bel <thed6bel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/31 13:35:34 by hucorrei          #+#    #+#              #
-#    Updated: 2023/10/19 13:08:17 by hucorrei         ###   ########.fr        #
+#    Updated: 2023/10/30 11:40:00 by thed6bel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #                                     CONFIG                                   #
 ################################################################################
 
-NAME		= 
+NAME		= PmergeMe
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 OBJ_DIR		= .objs
