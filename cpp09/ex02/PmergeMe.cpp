@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thed6bel <thed6bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:01:27 by thed6bel          #+#    #+#             */
-/*   Updated: 2023/10/31 11:20:59 by thed6bel         ###   ########.fr       */
+/*   Updated: 2023/11/03 10:38:10 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ bool PmergeMe::invalidArg(char **args, int argc) {
                 return true;
             }
         }
-        for (int j = i - 1; j >= 0; j--) {
-            if (std::string(args[i]) == std::string(args[j])) {
-                std::cout << "Error: double input.";
-                return true;
-            }
-        }
+        // for (int j = i - 1; j >= 0; j--) {
+        //     if (std::string(args[i]) == std::string(args[j])) {
+        //         std::cout << "Error: double input.";
+        //         return true;
+        //     }
+        // } 
         if (std::strtol(args[i], NULL, 10) > 2147483647) {
-            std::cout << "Error: maximum value of an integer is reached.";
+            std::cout << "Error: maximum value of an integer is exceeded.";
             return true;
         }
     }
@@ -116,7 +116,7 @@ T PmergeMe::FJ_MergeSort(T container) {
 void PmergeMe::startShort() {
     double time_vector, time_deque;
     struct timeval start_time, end_time;
-    std::deque<int>    temp = std::deque<int>(_intDeque.begin(), _intDeque.end());;
+    // std::deque<int>    temp = std::deque<int>(_intDeque.begin(), _intDeque.end());;
 
     std::cout << "Before:\t";
     for (size_t i = 0; i < _intVector.size(); i++) {
@@ -143,5 +143,5 @@ void PmergeMe::startShort() {
     time_deque += (end_time.tv_usec - start_time.tv_usec) / 1000.0;
 
     std::cout << "Time to process a range of " << _intVector.size() << " elements with std::vector : " << std::fixed << std::setprecision(5) << time_vector << " us" << std::endl;
-    std::cout << "Time to process a range of " << _intDeque.size() << " elements with std::deque : " << std::fixed << std::setprecision(5) << time_deque << " us" << std::endl;
+    std::cout << "Time to process a range of " << _intDeque.size() << " elements with std::deque  : " << std::fixed << std::setprecision(5) << time_deque << " us" << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:31:28 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/27 13:28:53 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/11/03 14:18:48 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,12 +184,16 @@ void BitcoinExchange::result(BitcoinExchange &fd) {
 		}
 		if (checkLineFormat(line))
 			continue ;
-        if (line[11] != '|') {
+        if (line[11] != '|' || line[13] == '\0') {
             std::cout << "Error: Bad input => " << line << std::endl;
             continue ;
         }
 		date = line.substr(0, line.find_first_of("|") - 1).c_str();
 		value = atof(line.substr(line.find_first_of("|") + 1).c_str());
+        if (value >= 1001) {
+            std::cout << "Error: maximum value is exceeded => " << line << std::endl;
+            continue ;
+        }
 
         date_tmp = date;
 		rate = getRate(date_tmp);

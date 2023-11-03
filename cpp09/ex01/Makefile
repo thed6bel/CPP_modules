@@ -6,7 +6,7 @@
 #    By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/31 13:35:34 by hucorrei          #+#    #+#              #
-#    Updated: 2023/10/27 14:04:08 by hucorrei         ###   ########.fr        #
+#    Updated: 2023/11/03 13:59:50 by hucorrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 NAME		= RPN
 CC			= c++
-CFLAGS		= -Wall -Wextra -Werror -std=c++98
+CFLAGS		= -Wall -Wextra -Werror -std=c++98 -fsanitize=address
 OBJ_DIR		= .objs
 RM			= rm -rf
 

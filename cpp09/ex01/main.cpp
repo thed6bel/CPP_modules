@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thed6bel <thed6bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:04:45 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/30 11:20:37 by thed6bel         ###   ########.fr       */
+/*   Updated: 2023/11/03 11:14:13 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ int	main(int argc, char **argv){
 		std::cout << "Error" << std::endl;
         return (1);
     }
-	ctrlExpression(argv[1]);
-    int result = calcRPN(argv[1]);
-    
-    std::cout << result << std::endl;
+	    
+    std::cout << calcRPN(argv[1]) << std::endl;
     
     return 0;
 }

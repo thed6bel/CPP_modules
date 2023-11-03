@@ -3,29 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thed6bel <thed6bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:04:42 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/10/30 11:38:48 by thed6bel         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:13:27 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
 int calcRPN(const std::string& expression) {
+    ctrlExpression(expression);
     std::stack<int> numbers;
 
     std::stringstream ss(expression);
     std::string token;
+    int operand2, operand1;
     while (ss >> token) {
         if (isdigit(token[0])) {
             int number = std::atoi(token.c_str());
             numbers.push(number);
         } else {
-            int operand2 = numbers.top();
-            numbers.pop();
-            int operand1 = numbers.top();
-            numbers.pop();
+            if (numbers.size() <= 1) {
+                std::cout << "Error" << std::endl;
+                exit(1);
+            }
+            else {
+                operand2 = numbers.top();
+                numbers.pop();
+                operand1 = numbers.top();
+                numbers.pop();
+            }
             
             if (token == "+") {
                 numbers.push(operand1 + operand2);
@@ -38,7 +46,12 @@ int calcRPN(const std::string& expression) {
             }
         }
     }
-    return numbers.top();
+    if (numbers.size() != 1) {
+        std::cout << "Error" << std::endl;
+        exit(1);
+    }
+    else
+        return numbers.top();
 }
 
 void ctrlExpression(std::string expression) {
@@ -54,6 +67,11 @@ void ctrlExpression(std::string expression) {
 					exit(1);
 				}
 			}
+            if (expression[i] == '/') {
+                if (expression[i - 2] == '0') {
+                    std::cout << "Error : can't divide by 0" << std::endl;
+                    exit(1);}
+            }
 		}
 		else if (isdigit(expression[i])) {
 			continue;
@@ -61,6 +79,7 @@ void ctrlExpression(std::string expression) {
 		else {
 			std::cout << "Error" << std::endl;
 			exit(1);
+
 		}
 	}
 }
